@@ -14,7 +14,7 @@ class Image_classification_models():
 	def conv_model_1(self):
 		model = Sequential()
 
-		model.add(Conv2D(16, 3))
+		model.add(Conv2D(16, 3, input_shape=(self.image_size, self.image_size, 3)))
 		model.add(BatchNormalization())
 		model.add(Activation('relu'))
 		model.add(MaxPooling2D())
@@ -43,7 +43,7 @@ class Image_classification_models():
 
 	def conv_model_2(self):
 		model = Sequential()
-		model.add(Conv2D(16, 3))
+		model.add(Conv2D(16, 3, input_shape=(self.image_size, self.image_size, 3)))
 		model.add(BatchNormalization())
 		model.add(Activation('relu'))
 		model.add(MaxPooling2D())
@@ -136,7 +136,8 @@ class Text_classification_models():
 			return_sequences=True,
 			activation='relu',
 			dropout=self.dropout,
-			recurrent_dropout=self.recurrent_dropout)))
+			recurrent_dropout=self.recurrent_dropout),
+            input_shape=(10, 100))) #10 sequence length, 100 dimension embedding
 
 		#use max pool to select the highest result
 		model.add(GlobalMaxPooling1D())

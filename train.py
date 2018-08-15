@@ -69,7 +69,7 @@ def train_image():
 
 	#test the model on test set
 	best_model_train = best_model.evaluate(x_train, y_train, batch_size=hm_batch, verbose=0)
-	best_model_test = best_model.evaluate(x_test, x_test, batch_size=hm_batch, verbose=0)
+	best_model_test = best_model.evaluate(x_test, y_test, batch_size=hm_batch, verbose=0)
 
 	print('Train loss: %.3f acc %.3f' %(best_model_train[0], best_model_train[1]))
 	print('Test loss: %.3f acc %.3f' %(best_model_test[0], best_model_test[1]))
@@ -79,7 +79,6 @@ def train_image():
 	best_model.save(model_path + '/best_image_model.h5')
 
 def train_spectogram():
-    image_size = 224
     x_train, x_valid, x_test, y_train, y_valid, y_test = utils.get_spectogram_data(image_size)
 
     #instantiate the class
@@ -115,7 +114,7 @@ def train_spectogram():
 
     #test the model on test set
     best_model_train = best_model.evaluate(x_train, y_train, batch_size=hm_batch, verbose=0)
-    best_model_test = best_model.evaluate(x_test, x_test, batch_size=hm_batch, verbose=0)
+    best_model_test = best_model.evaluate(x_test, y_test, batch_size=hm_batch, verbose=0)
 
     print('Train loss: %.3f acc %.3f' %(best_model_train[0], best_model_train[1]))
     print('Test loss: %.3f acc %.3f' %(best_model_test[0], best_model_test[1]))
@@ -125,6 +124,6 @@ def train_spectogram():
     best_model.save(model_path + '/best_spectogram_model.h5')
 
 if __name__ == "__main__":
-    train_image()
     train_text()
     train_spectogram()
+    train_image()
